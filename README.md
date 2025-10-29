@@ -130,94 +130,270 @@ A store can have many employees, but each employee works in only one store.
     - **The delivery person assigned**
     - **Delivery date/time**
 
+### **Exercise 02 - Queries needed for validation**
 
-### **Exercises 1 to 2 Observation**
+- List how many products from the “Drinks” category were sold in a specific town.
+- List how many orders a particular employee handled.
 
-As exercise 2 consist in addition of one more condition to the same list of exercise 1 i've done
-both exercises in the same package and Application class.
+## Exercise 2 – Pizzeria
 
-### **Exercise 03**
+You have been hired to design a website that allows customers to place online food delivery orders.
 
-	Create a list with the names of the months of the year. Print all elements of the list using a lambda expression.
+### Database Modeling Guidelines
+For each client, we store a unique identifier:
+- **First name**
+- **Last name(s)**
+- **Address**
+- **Postal code**
+- **Town/City**
+- **Province**
+- **Phone number**
 
-### **Exercise 04**
+Town and province data will be stored in separate tables:
+- A town belongs to a single province.
+- A province can have many towns.
 
-	Do the same print as in the previous point, but using a method reference.
+For each town, we store:
+- **Unique identifier**
+- **Name**
 
-### **Exercises 3 to 4 Observation**
+For each province, we store:
+- **Unique identifier**
+- **Name**
 
-As exercise 4 consist in printing the same list from exercise 3 using method *references* i've
-unified both exercises in the same package.
+### Orders
+A person can place many orders, but each order can be placed by only one person.
 
-### **Exercise 05**
+For each order, we store:
+- **Unique identifier**
+- **Date/time**
+- **Type:** delivery or pickup
+- **Quantity of each product**
+- **Total price**
 
-	Create aFunctional Interface with a method named getPiValue() that must return a double. From the main() method
-	of the main class, instantiate the interface and assign it the value 3.1415. Invoke the getPiValue() method and
-	print the result.
+An order can contain one or several products.
 
-### **Exercise 06**
+### Products
+Products can be **pizzas**, **burgers**, or **drinks**.
 
-	Create a list with numbers and text strings and sort the list with the strings from shortest to longest.
+For each product, we store:
+- **Unique identifier**
+- **Name**
+- **Description**
+- **Image**
+- **Price**
 
-### **Exercise 07**
+#### Pizza Categories
+- Pizzas can belong to various categories, which may change names throughout the year.
+- A pizza belongs to only one category.
+- A category can contain many pizzas.
 
-	With the list from the previous exercise, now sort it in reverse, from the longest string to the shortest.
+For each category, we store:
+- **Unique identifier**
+- **Name**
 
-### **Exercises 6 to 7 Observation**
+### Stores and Employees
+An order is managed by a single store, and a store can manage many orders.
 
-As exercise 7 consist in printing the same list but reversed from exercise 6
-I've made both in the same package and main.
+For each store, we store:
+- **Unique identifier**
+- **Address**
+- **Postal code**
+- **Town/City**
+- **Province**
 
-### **Exercise 08**
+A store can have many employees, but each employee works in only one store.
 
-	Create a Functional Interface that contains a method named reverse(). This method must take a String as input and
-	return a String. In the main() method of the main class, inject into the created interface using a lambda expression
-	the body of the method, so that it returns the same string received as a parameter but reversed. Invoke the instance
-	of the interface by passing it a string and check if the result is correct.
+For each employee, we store:
+- **Unique identifier**
+- **First name**
+- **Last name(s)**
+- **Tax ID (NIF)**
+- **Phone number**
+- **Role** (cook or delivery person)
 
-## **Level 02**
+For delivery orders, record:
+- **The delivery person assigned**
+- **Delivery date/time**
 
-### **Exercise 01**
+---
 
-	Create a list of strings with proper names. Write a method that returns a list of all strings that start with the
-	letter 'A' (uppercase) and have exactly 3 letters. Print the result.
+# Level 2
 
-### **Exercise 02**
+## Exercise 1 – YouTube
 
-	Write a method that returns a comma-separated string based on a list of Integers. Each element must be preceded
-	by the letter “e” if the number is even, or the letter “o” if the number is odd. For example, if the input list
-	is (3, 55, 44), the output must be: “o3, o55, e44”. Print the result.
+We will create a simple model of the database for a reduced version of **YouTube**.
 
-## **Exercise 03**
+### Users
+For each user, we store:
+- **Unique identifier**
+- **Email**
+- **Password**
+- **Username**
+- **Date of birth**
+- **Gender**
+- **Country**
+- **Postal code**
 
-	Create a Functional Interface that contains a method named operacio(). This method must return a float. Inject into
-	the created interface using a lambda the body of the method, so that the operation can be transformed into an
-	addition, subtraction, multiplication, and division.
+### Videos
+A user uploads videos. For each video, we store:
+- **Unique identifier**
+- **Title**
+- **Description**
+- **File size**
+- **Video file name**
+- **Duration**
+- **Thumbnail**
+- **Number of views**
+- **Number of likes**
+- **Number of dislikes**
 
-## **Exercise 04**
+A video can have three different statuses:
+- Public
+- Unlisted
+- Private
 
-	Create a list that contains some text strings and numbers.
-	Sort them by:
+A video can have multiple tags.  
+Each tag has:
+- **Unique identifier**
+- **Tag name**
 
-	- Alphabetically by the first character. (Note: charAt(0) returns the numeric code of the first character)
-  	- Strings that contain an "e" first, the rest of the strings after. Write the code directly in the lambda.
-	- Modify all elements of the list that contain an ‘a’. Replace the ‘a’ with a ‘4’.
-	- Show only the elements that are numeric. (Even if they are stored as Strings)
+We must also store:
+- **The user who uploaded** the video
+- **Upload date/time**
 
-### **Level 03**
+### Channels
+A user can create a channel.  
+For each channel, we store:
+- **Unique identifier**
+- **Name**
+- **Description**
+- **Creation date**
 
-**Exercise 01**
+### Subscriptions, Likes, and Playlists
+- A user can subscribe to other users’ channels.
+- A user can like or dislike a video **only once**.
+  - We must record **which users** liked/disliked each video and **when**.
 
-	Create a class Student with the attributes: name, age, course, and grade.
+#### Playlists
+A user can create playlists with videos they like.  
+For each playlist, we store:
+- **Unique identifier**
+- **Name**
+- **Creation date**
+- **Status** (public or private)
 
-	Fill a list with 10 students.
+### Comments
+A user can comment on a specific video.  
+Each comment has:
+- **Unique identifier**
+- **Text**
+- **Date/time posted**
 
-	- Display on screen the name and age of each student.
-	- Filter the list for all students whose name starts with the letter 'a'.
-	Assign these students to another list and display the new list (all using lambdas).
-	- Filter and display the students who have a grade of 5 or higher.
-	- Filter and display the students who have a grade of 5 or higher and who are not in the PHP course.
-	- Display all students who are taking JAVA and are of legal age (18 or older).
+A user can like or dislike a comment.  
+We must record:
+- **Which users** liked/disliked each comment
+- **Date/time** of action
+
+---
+
+# Level 3
+
+## Exercise 1 – Spotify
+
+We will create a simple model of the database required for **Spotify**.
+
+### Users
+There are two types of users: **free** and **premium**.
+
+For each user, we store:
+- **Unique identifier**
+- **Email**
+- **Password**
+- **Username**
+- **Date of birth**
+- **Gender**
+- **Country**
+- **Postal code**
+
+### Subscriptions
+Premium users have subscriptions.  
+For each subscription, we store:
+- **Start date**
+- **Renewal date**
+- **Payment method** (credit card or PayPal)
+
+#### Credit Card Payments
+We store:
+- **Card number**
+- **Expiration month and year**
+- **Security code**
+
+#### PayPal Payments
+We store:
+- **PayPal username**
+
+We must record all payments made by a premium user during their subscription period.  
+For each payment, we store:
+- **Date**
+- **Order number (unique)**
+- **Total amount**
+
+### Playlists
+A user can create many playlists.  
+For each playlist, we store:
+- **Title**
+- **Number of songs**
+- **Unique identifier**
+- **Creation date**
+
+When a playlist is deleted, it is **not** removed from the system — it is **marked as deleted**.  
+We store:
+- **Date when it was marked as deleted**
+
+There are two types of playlists:
+- **Active**
+- **Deleted**
+
+An active playlist can be **shared** with other users.  
+For shared playlists, we record:
+- **Which user** added each song
+- **Date/time** added
+
+### Songs, Albums, and Artists
+- A song belongs to **one album only**.
+- An album can contain **many songs**.
+- An album is published by **one artist**.
+- An artist can publish **many albums**.
+
+#### Songs
+For each song, we store:
+- **Unique identifier**
+- **Title**
+- **Duration**
+- **Number of plays**
+
+#### Albums
+For each album, we store:
+- **Unique identifier**
+- **Title**
+- **Year of release**
+- **Cover image**
+
+#### Artists
+For each artist, we store:
+- **Unique identifier**
+- **Name**
+- **Artist image**
+
+### Favorites and Relationships
+- A user can follow many artists.
+- Artists can be related to other artists (to show “related artists”).
+- A user can mark multiple albums and songs as favorites.
+
+> **Note:** Once the databases are created, fill the tables with test data to verify that the relationships are correct.
+
+---
 
 ## 💻 **Used technologies**
 
