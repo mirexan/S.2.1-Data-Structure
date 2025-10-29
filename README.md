@@ -10,159 +10,73 @@ Also it has to include an Script.sql that creates an loads the Data Base.
 
 ## **Exercise 01 - Optic**
 
-    An optical store called “Cul d’Ampolla” wants to computerize the management of its clients and eyeglass sales.
+An optical store called “Bottle Bottom” wants to computerize the management of its clients and eyeglass sales.
 
-    SuppliersAn optical store called **“Cul d’Ampolla”** wants to computerize the management of its clients and eyeglass sales.
+### **Providers**
+    
+The store wants to know which supplier provides each pair of glasses. Specifically, for each supplier, they want to know:
+- **Name**
+- **Address** (street, number, floor, door, city, postal code, and country)
+- **Telephone**
+- **Fax**
+- **Tax ID (NIF)**
 
-**Suppliers**
-    The store wants to know which supplier provides each pair of glasses. Specifically, for each supplier, they want to know:
-    - **Name**
-    - **Address** (street, number, floor, door, city, postal code, and country)
-    - **Telephone**
-    - **Fax**
-    - **Tax ID (NIF)**
+The store’s purchasing policy is that glasses of a particular brand will be bought from a single supplier (to obtain better prices), but a supplier can provide glasses from several brands.
 
-    The store’s purchasing policy is that glasses of a particular brand will be bought from a single supplier (to obtain better prices), but a supplier can provide glasses from several brands.
+### **Glasses**
+For each pair of glasses, they want to know:
+- **Brand**
+- **Lens prescription for each eye**
+- **Frame type** (rimless, plastic, or metal)
+- **Frame color**
+- **Lens color** (for each lens)
+- **Price**
 
-**Glasses**
-    For each pair of glasses, they want to know:
-    - **Brand**
-    - **Lens prescription for each eye**
-    - **Frame type** (rimless, plastic, or metal)
-    - **Frame color**
-    - **Lens color** (for each lens)
-    - **Price**
-
-**Clients**
-    For each client, the store wants to store:
-    - **Name**
-    - **Postal address**
-    - **Telephone number**
-    - **Email address**
-    - **Registration date**
-    - **The client who recommended** the establishment (if any)
-    - **The employee who sold** each pair of glasses
+### **Clients**
+For each client, the store wants to store:
+- **Name**
+- **Postal address**
+- **Telephone number**
+- **Email address**
+- **Registration date**
+- **The client who recommended** the establishment (if any)
+- **The employee who sold** each pair of glasses
 
 ### **Exercise 01 - Queries needed for validation**
 
-- List the total number of invoices for a client within a specific period.
-- List the different models of glasses sold by an employee during a year.
-- List the suppliers who provided successfully sold glasses.
+    - List the total number of invoices for a client within a specific period.
+    - List the different models of glasses sold by an employee during a year.
+    - List the suppliers who provided successfully sold glasses.
 
 ## **Exercise 02- Pizza Shop02**
 
 You have been hired to design a website that allows customers to place online food delivery orders.
 
-### Database Modeling Guidelines
+### Client
 
-    For each client, we store a unique identifier:
-    - **First name**
-    - **Last name(s)**
-    - **Address**
-    - **Postal code**
-    - **Town/City**
-    - **Province**
-    - **Phone number**
-    - Town and province data will be stored in separate tables:
-        - A town belongs to a single province.
-        - A province can have many towns.
+   For each client, we store a unique identifier:
+   - **First name**
+   - **Last name(s)**
+   - **Address**
+   - **Postal code**
+   - **Town/City**
+   - **Province**
+   - **Phone number**
+   - Town and province data will be stored in separate tables:
+       - A town belongs to a single province.
+       - A province can have many towns.
 
-    - For each town, we store:
-        - **Unique identifier**
-        - **Name**
+   - For each town, we store:
+       - **Unique identifier**
+       - **Name**
 
-    - For each province, we store:
-        - **Unique identifier**
-        - **Name**
-
+   - For each province, we store:
+       - **Unique identifier**
+       - **Name**
 
 **A person can place many orders, but each order can be placed by only one person.**
 
-    For each order, we store:
-    - **Unique identifier**
-    - **Date/time**
-    - **Type:** delivery or pickup
-    - **Quantity of each product**
-    - **Total price**
-
-**An order can contain one or several products.**
-
-
-Products can be **pizzas**, **burgers**, or **drinks**.
-
-    For each product, we store:
-    - **Unique identifier**
-    - **Name**
-    - **Description**
-    - **Image**
-    - **Price**
-
-#### Pizza Categories
-- Pizzas can belong to various categories, which may change names throughout the year.
-- A pizza belongs to only one category.
-- A category can contain many pizzas.
-
-    For each category, we store:
-    - **Unique identifier**
-    - **Name**
-
-### Stores and Employees
-An order is managed by a single store, and a store can manage many orders.
-
-    For each store, we store:
-    - **Unique identifier**
-    - **Address**
-    - **Postal code**
-    - **Town/City**
-    - **Province**
-
-A store can have many employees, but each employee works in only one store.
-
-    For each employee, we store:
-    - **Unique identifier**
-    - **First name**
-    - **Last name(s)**
-    - **Tax ID (NIF)**
-    - **Phone number**
-    - **Role** (cook or delivery person)
-
-    For delivery orders, record:
-    - **The delivery person assigned**
-    - **Delivery date/time**
-
-### **Exercise 02 - Queries needed for validation**
-
-- List how many products from the “Drinks” category were sold in a specific town.
-- List how many orders a particular employee handled.
-
-## Exercise 2 – Pizzeria
-
-You have been hired to design a website that allows customers to place online food delivery orders.
-
-### Database Modeling Guidelines
-For each client, we store a unique identifier:
-- **First name**
-- **Last name(s)**
-- **Address**
-- **Postal code**
-- **Town/City**
-- **Province**
-- **Phone number**
-
-Town and province data will be stored in separate tables:
-- A town belongs to a single province.
-- A province can have many towns.
-
-For each town, we store:
-- **Unique identifier**
-- **Name**
-
-For each province, we store:
-- **Unique identifier**
-- **Name**
-
-### Orders
-A person can place many orders, but each order can be placed by only one person.
+### Order
 
 For each order, we store:
 - **Unique identifier**
@@ -171,9 +85,10 @@ For each order, we store:
 - **Quantity of each product**
 - **Total price**
 
-An order can contain one or several products.
+**An order can contain one or several products.**
 
-### Products
+### Product 
+
 Products can be **pizzas**, **burgers**, or **drinks**.
 
 For each product, we store:
@@ -183,8 +98,9 @@ For each product, we store:
 - **Image**
 - **Price**
 
-#### Pizza Categories
-- Pizzas can belong to various categories, which may change names throughout the year.
+### Pizza Categories
+
+Pizzas can belong to various categories, which may change names throughout the year.
 - A pizza belongs to only one category.
 - A category can contain many pizzas.
 
@@ -192,8 +108,9 @@ For each category, we store:
 - **Unique identifier**
 - **Name**
 
-### Stores and Employees
 An order is managed by a single store, and a store can manage many orders.
+
+### Stores and Employees
 
 For each store, we store:
 - **Unique identifier**
@@ -204,17 +121,25 @@ For each store, we store:
 
 A store can have many employees, but each employee works in only one store.
 
-For each employee, we store:
-- **Unique identifier**
-- **First name**
-- **Last name(s)**
-- **Tax ID (NIF)**
-- **Phone number**
-- **Role** (cook or delivery person)
+### Employee
 
-For delivery orders, record:
+   For each employee, we store:
+   - **Unique identifier**
+   - **First name**
+   - **Last name(s)**
+   - **Tax ID (NIF)**
+   - **Phone number**
+   - **Role** (cook or delivery person)
+
+   For delivery orders, record:
+
 - **The delivery person assigned**
 - **Delivery date/time**
+
+### **Exercise 02 - Queries needed for validation**
+
+    - List how many products from the “Drinks” category were sold in a specific town.
+    - List how many orders a particular employee handled.
 
 ---
 
