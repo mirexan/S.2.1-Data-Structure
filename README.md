@@ -334,3 +334,5 @@ For each artist, we store:
 1. Clone this repo: **>  [git clone](https://github.com/mirexan/S1.8-Lambdas)**
 2. Access to the directories in: S1.8-Lambdas
 3. Execute each program in each main file.
+
+[img]https://images.unsplash.com/photo-1517584623449-78bf7667d0f6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGRvbHBoaW58ZW58MHwwfDB8fHwy&auto=format&fit=crop&q=60&w=500
