@@ -1,4 +1,3 @@
-
 # S2.1-Data Structure
 
 # 📄 **Description**
@@ -8,39 +7,21 @@
 For all exercises, a Entity Relation Model should be added with the dessign of Data Base.
 Also it has to include an Script.sql that creates an loads the Data Base.
 
-## **Exercise 01 - Optic**
+## **Exercise 01 - Optic** 👓:
 
-An optical store called “Bottle Bottom” wants to computerize the management of its clients and eyeglass sales.
+Design a database for an optical store to manage Providers, Glasses, and Clients.
 
-### **Providers**
-    
-The store wants to know which supplier provides each pair of glasses. Specifically, for each supplier, they want to know:
-- **Name**
-- **Address** (street, number, floor, door, city, postal code, and country)
-- **Telephone**
-- **Fax**
-- **Tax ID (NIF)**
+- Providers: Store name, address, contact details (phone, fax), and NIF.
 
-The store’s purchasing policy is that glasses of a particular brand will be bought from a single supplier (to obtain better prices), but a supplier can provide glasses from several brands.
+- Glasses: Store brand, prescription, frame details (type, color), lens color, and price.
 
-### **Glasses**
-For each pair of glasses, they want to know:
-- **Brand**
-- **Lens prescription for each eye**
-- **Frame type** (rimless, plastic, or metal)
-- **Frame color**
-- **Lens color** (for each lens)
-- **Price**
+- Clients: Store name, contact info (address, phone, email), registration date, and the client who referred them (if any).
 
-### **Clients**
-For each client, the store wants to store:
-- **Name**
-- **Postal address**
-- **Telephone number**
-- **Email address**
-- **Registration date**
-- **The client who recommended** the establishment (if any)
-- **The employee who sold** each pair of glasses
+  Relationships:
+
+        A single supplier provides all glasses for a specific Brand (1:N Supplier:Brand).
+
+        Must track which Employee sold which pair of glasses to a client.
 
 ### **Exercise 01 - Queries needed for validation**
 
@@ -48,93 +29,27 @@ For each client, the store wants to store:
     - List the different models of glasses sold by an employee during a year.
     - List the suppliers who provided successfully sold glasses.
 
-## **Exercise 02- Pizza Shop02**
+## **Exercise 02- Pizza Shop** 🍕
 
-You have been hired to design a website that allows customers to place online food delivery orders.
+Design a database for a pizza delivery website, managing clients, orders, products, stores, and employees.
 
-### Client
+- Clients: Store name, contact info, and a normalized address (Town, Province).
 
-   For each client, we store a unique identifier:
-   - **First name**
-   - **Last name(s)**
-   - **Address**
-   - **Postal code**
-   - **Town/City**
-   - **Province**
-   - **Phone number**
-   - Town and province data will be stored in separate tables:
-       - A town belongs to a single province.
-       - A province can have many towns.
+- Orders: Store date/time, type (delivery/pickup), and total price. An order belongs to one Client (1:N Client:Order).
 
-   - For each town, we store:
-       - **Unique identifier**
-       - **Name**
+- Products: Store name, description, image, and price. Products are typed (Pizza, Burger, Drink).
 
-   - For each province, we store:
-       - **Unique identifier**
-       - **Name**
+- Categories: Pizzas belong to Categories (1:N Category:Pizza).
 
-**A person can place many orders, but each order can be placed by only one person.**
+- Stores: Store address and location. A store manages many Orders (1:N Store:Order).
 
-### Order
+- Employees: Store name, NIF, phone, and role (cook/delivery). An employee works at one Store (1:N Store:Employee).
 
-For each order, we store:
-- **Unique identifier**
-- **Date/time**
-- **Type:** delivery or pickup
-- **Quantity of each product**
-- **Total price**
+  Relationships:
 
-**An order can contain one or several products.**
+        An order contains multiple products with quantities (N:M, requires an Order_Product join table).
 
-### Product 
-
-Products can be **pizzas**, **burgers**, or **drinks**.
-
-For each product, we store:
-- **Unique identifier**
-- **Name**
-- **Description**
-- **Image**
-- **Price**
-
-### Pizza Categories
-
-Pizzas can belong to various categories, which may change names throughout the year.
-- A pizza belongs to only one category.
-- A category can contain many pizzas.
-
-For each category, we store:
-- **Unique identifier**
-- **Name**
-
-An order is managed by a single store, and a store can manage many orders.
-
-### Stores and Employees
-
-For each store, we store:
-- **Unique identifier**
-- **Address**
-- **Postal code**
-- **Town/City**
-- **Province**
-
-A store can have many employees, but each employee works in only one store.
-
-### Employee
-
-   For each employee, we store:
-   - **Unique identifier**
-   - **First name**
-   - **Last name(s)**
-   - **Tax ID (NIF)**
-   - **Phone number**
-   - **Role** (cook or delivery person)
-
-   For delivery orders, record:
-
-- **The delivery person assigned**
-- **Delivery date/time**
+        Delivery orders must track the specific Employee (delivery person) and the delivery time.
 
 ### **Exercise 02 - Queries needed for validation**
 
@@ -145,194 +60,75 @@ A store can have many employees, but each employee works in only one store.
 
 # Level 2
 
-## Exercise 1 – YouTube
+## Exercise 1 – YouTube 🎥
 
-We will create a simple model of the database for a reduced version of **YouTube**.
+Design a database for a simplified version of YouTube.
 
-### Users
-For each user, we store:
-- **Unique identifier**
-- **Email**
-- **Password**
-- **Username**
-- **Date of birth**
-- **Gender**
-- **Country**
-- **Postal code**
+- Users: Store email, password, username, and demographic info (DOB, gender, country).
 
-### Videos
-A user uploads videos. For each video, we store:
-- **Unique identifier**
-- **Title**
-- **Description**
-- **File size**
-- **Video file name**
-- **Duration**
-- **Thumbnail**
-- **Number of views**
-- **Number of likes**
-- **Number of dislikes**
+- Videos: Store title, description, file info (size, name, duration), thumbnail, and counters (views, likes, dislikes). Videos have a status (Public, Unlisted, Private) and an upload date/time.
 
-A video can have three different statuses:
-- Public
-- Unlisted
-- Private
+- Channels: Users can create a Channel (1:N) with a name, description, and creation date.
 
-A video can have multiple tags.  
-Each tag has:
-- **Unique identifier**
-- **Tag name**
+- Tags: Videos can have multiple Tags (N:M relationship).
 
-We must also store:
-- **The user who uploaded** the video
-- **Upload date/time**
+- Playlists: Users can create Playlists (public or private) which contain multiple Videos (N:M relationship).
 
-### Channels
-A user can create a channel.  
-For each channel, we store:
-- **Unique identifier**
-- **Name**
-- **Description**
-- **Creation date**
+- Subscriptions: Users can subscribe to Channels (N:M relationship).
 
-### Subscriptions, Likes, and Playlists
-- A user can subscribe to other users’ channels.
-- A user can like or dislike a video **only once**.
-  - We must record **which users** liked/disliked each video and **when**.
+- Comments: Users can Comment on Videos (1:N Video:Comment).
 
-#### Playlists
-A user can create playlists with videos they like.  
-For each playlist, we store:
-- **Unique identifier**
-- **Name**
-- **Creation date**
-- **Status** (public or private)
-
-### Comments
-A user can comment on a specific video.  
-Each comment has:
-- **Unique identifier**
-- **Text**
-- **Date/time posted**
-
-A user can like or dislike a comment.  
-We must record:
-- **Which users** liked/disliked each comment
-- **Date/time** of action
+- Likes/Dislikes: The system must track which user liked/disliked which video and when (N:M join table). It must also track likes/dislikes for Comments.
 
 ---
 
 # Level 3
 
-## Exercise 1 – Spotify
+## Exercise 1 – Spotify🎵
 
 We will create a simple model of the database required for **Spotify**.
 
-### Users
-There are two types of users: **free** and **premium**.
+This document outlines the requirements for a simplified Spotify database model.
 
-For each user, we store:
-- **Unique identifier**
-- **Email**
-- **Password**
-- **Username**
-- **Date of birth**
-- **Gender**
-- **Country**
-- **Postal code**
+Core Entities:
 
-### Subscriptions
-Premium users have subscriptions.  
-For each subscription, we store:
-- **Start date**
-- **Renewal date**
-- **Payment method** (credit card or PayPal)
+- Users: Can be Free or Premium. Stored data includes ID, email, password, username, date of birth, gender, country, and postal code.
 
-#### Credit Card Payments
-We store:
-- **Card number**
-- **Expiration month and year**
-- **Security code**
+- Subscriptions: For premium users, including start/renewal dates and payment method (Credit Card or PayPal). All payment history (date, order number, amount) is recorded.
 
-#### PayPal Payments
-We store:
-- **PayPal username**
+- Playlists: Created by users, with a title, song count, ID, and creation date. Deleted playlists are marked as such (not removed) and given a deletion date. Active playlists can be shared, tracking which user added a song and when.
 
-We must record all payments made by a premium user during their subscription period.  
-For each payment, we store:
-- **Date**
-- **Order number (unique)**
-- **Total amount**
+- Music Catalog: Includes Songs (title, duration, plays), Albums (title, release year, cover), and Artists (name, image). A song belongs to one album, and an album belongs to one artist, who can have many albums.
 
-### Playlists
-A user can create many playlists.  
-For each playlist, we store:
-- **Title**
-- **Number of songs**
-- **Unique identifier**
-- **Creation date**
+Relationships:
 
-When a playlist is deleted, it is **not** removed from the system — it is **marked as deleted**.  
-We store:
-- **Date when it was marked as deleted**
+    A user can follow many artists.
 
-There are two types of playlists:
-- **Active**
-- **Deleted**
+    Artists can be related to other artists.
 
-An active playlist can be **shared** with other users.  
-For shared playlists, we record:
-- **Which user** added each song
-- **Date/time** added
+    A user can mark songs and albums as favorites.
 
-### Songs, Albums, and Artists
-- A song belongs to **one album only**.
-- An album can contain **many songs**.
-- An album is published by **one artist**.
-- An artist can publish **many albums**.
+Final Note: The database must be populated with test data to verify all relationships.
 
-#### Songs
-For each song, we store:
-- **Unique identifier**
-- **Title**
-- **Duration**
-- **Number of plays**
-
-#### Albums
-For each album, we store:
-- **Unique identifier**
-- **Title**
-- **Year of release**
-- **Cover image**
-
-#### Artists
-For each artist, we store:
-- **Unique identifier**
-- **Name**
-- **Artist image**
-
-### Favorites and Relationships
-- A user can follow many artists.
-- Artists can be related to other artists (to show “related artists”).
-- A user can mark multiple albums and songs as favorites.
-
-> **Note:** Once the databases are created, fill the tables with test data to verify that the relationships are correct.
 
 ---
 
 ## 💻 **Used technologies**
 
-- Java
+- MySQL Workbench
 - Git
 
 ## 📋 **Requirements**
 
-- Oracle OpenJDK 21.0.8
+- MySQL 8
 
 ## 🛠️ **Install**
 
-1. Clone this repo: **>  [git clone](https://github.com/mirexan/S1.8-Lambdas)**
-2. Access to the directories in: S1.8-Lambdas
-3. Execute each program in each main file.
+1. Clone this repo: **>  [git clone](https://github.com/mirexan/S.2.1-Data-Structure.git)**
+2. Start using mysql-workbench and entry a local server
+3. Open to the directories in: S2.1-Data Structures
+4. Execute the script in exercise directory.
+5. Execute insert script.
+6. Execute queries script.
 
 ![imagen](https://images.unsplash.com/photo-1517584623449-78bf7667d0f6?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGRvbHBoaW58ZW58MHwwfDB8fHwy&auto=format&fit=crop&q=60&w=500)
