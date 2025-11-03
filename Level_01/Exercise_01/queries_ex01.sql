@@ -1,28 +1,33 @@
 
-SELECT client_name, count(*) AS num_facturation
-FROM sale
-WHERE client_name = 'Pepita'
-AND sale_date BETWEEN '2025-06-09' AND '2025-06-12'
-GROUP BY client_name;
+SELECT s.client_id,
+c.client_name,
+count(*) AS num_facturation
+FROM sale s
+JOIN `client` c
+ON s.client_id = c.client_id
+WHERE s.client_id = 1
+AND s.sale_date BETWEEN '2025-06-09' AND '2025-06-12'
+GROUP BY s.client_id;
 
-SELECT DISTINCT sale.selling_agent,
-sale.glasses_id,
-glasses.brand AS brand
+SELECT DISTINCT sale.agent_id,
+sale.glass_id,
+glass.brand AS brand
 FROM sale
-INNER JOIN glasses
-	ON sale.glasses_id = glasses.glasses_id
-WHERE sale.selling_agent = 'Alberto Domingo'
+INNER JOIN glass
+	ON sale.glass_id = glass.glass_id
+WHERE sale.agent_id = 1
 AND sale.sale_date BETWEEN '2025-01-01' AND '2026-01-01';
 
-SELECT provider.provider_name,
-glasses.brand AS brand,
+SELECT provider.provider_id,
+provider.provider_name,
+glass.brand AS brand,
 SUM(sale.quantity) AS Total_Sold
 FROM sale
-INNER JOIN glasses
-	ON sale.glasses_id = glasses.glasses_id
+INNER JOIN glass
+	ON sale.glass_id = glass.glass_id
 INNER JOIN provider
-    ON glasses.provider_name = provider.provider_name
-GROUP BY provider.provider_name, glasses.brand
+    ON glass.provider_id= provider.provider_id
+GROUP BY provider.provider_name, glass.brand
 ;
     
 
